@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prompt Architect"
+  short_description: "Silently clarifies rough requests and completes them"
+  default_prompt: "Use $prompt-architect to silently refine my rough request using relevant context, then complete the task."
+policy:
+  allow_implicit_invocation: true

@@ -1,0 +1,18 @@
+[
+  {"query": "$prompt-architect собери мой сырой запрос и сразу сделай задачу", "should_trigger": true},
+  {"query": "молча улучши мой запрос с учетом контекста и выполни его", "should_trigger": true},
+  {"query": "поправь этот сырой промпт и учти что выше мы уже выбрали формат", "should_trigger": true},
+  {"query": "усиль мой запрос для Codex, но не выполняй саму задачу", "should_trigger": true},
+  {"query": "собери из этой голосовой расшифровки нормальный промт", "should_trigger": true},
+  {"query": "у меня поток мыслей, преврати его в понятное задание для модели", "should_trigger": true},
+  {"query": "подготовь это для Spark: пофикси кнопку и проверь тесты", "should_trigger": true},
+  {"query": "optimize this rough request and execute it without showing the rewritten prompt", "should_trigger": true},
+  {"query": "напиши письмо Анне о переносе встречи", "should_trigger": false},
+  {"query": "исправь грамматику в этом абзаце для резюме", "should_trigger": false},
+  {"query": "почини падающий тест в auth.test.ts", "should_trigger": false},
+  {"query": "переведи это сообщение на английский", "should_trigger": false},
+  {"query": "объясни разницу между REST и GraphQL", "should_trigger": false},
+  {"query": "суммаризируй прикрепленный PDF", "should_trigger": false},
+  {"query": "создай напоминание на завтра в девять", "should_trigger": false},
+  {"query": "найди актуальную цену этого ноутбука", "should_trigger": false}
+]
