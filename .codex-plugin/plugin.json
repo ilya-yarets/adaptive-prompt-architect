@@ -1,0 +1,47 @@
+{
+  "name": "adaptive-prompt-architect",
+  "version": "0.1.0",
+  "description": "Context-aware Agent Skill that silently refines rough requests, voice transcripts, and streams of thought, then completes the task without changing user intent.",
+  "author": {
+    "name": "Ilia",
+    "url": "https://github.com/ilya-yarets"
+  },
+  "homepage": "https://github.com/ilya-yarets/adaptive-prompt-architect",
+  "repository": "https://github.com/ilya-yarets/adaptive-prompt-architect",
+  "license": "MIT",
+  "keywords": [
+    "agent skill",
+    "prompt engineering",
+    "prompt optimizer",
+    "prompt rewriter",
+    "context engineering",
+    "intent reconstruction",
+    "voice transcription",
+    "ASR",
+    "Codex",
+    "ChatGPT"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Adaptive Prompt Architect",
+    "shortDescription": "Refines rough requests and completes them",
+    "longDescription": "Turns typo-filled notes, voice transcripts, and streams of thought into a minimal internal execution specification, then completes the task. Prompt-only and show-and-execute modes remain available.",
+    "developerName": "Ilia",
+    "category": "Productivity",
+    "capabilities": [
+      "Interactive"
+    ],
+    "websiteURL": "https://github.com/ilya-yarets/adaptive-prompt-architect",
+    "privacyPolicyURL": "https://github.com/ilya-yarets/adaptive-prompt-architect/blob/main/PRIVACY.md",
+    "termsOfServiceURL": "https://github.com/ilya-yarets/adaptive-prompt-architect/blob/main/TERMS.md",
+    "defaultPrompt": [
+      "Silently refine my rough request using relevant context, then complete the task.",
+      "Turn my latest message into a copy-ready prompt only.",
+      "Глубоко уточни мой последний запрос и выполни его."
+    ],
+    "brandColor": "#4F46E5",
+    "composerIcon": "./skills/prompt-architect/assets/icon.png",
+    "logo": "./skills/prompt-architect/assets/icon.png",
+    "logoDark": "./skills/prompt-architect/assets/icon.png"
+  }
+}

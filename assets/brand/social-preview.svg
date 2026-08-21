@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640" role="img" aria-labelledby="social-title social-desc">
+  <title id="social-title">Adaptive Prompt Architect</title>
+  <desc id="social-desc">A context-aware Agent Skill that turns rough intent into finished work.</desc>
+  <defs>
+    <linearGradient id="social-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#070B16"/>
+      <stop offset=".58" stop-color="#10172D"/>
+      <stop offset="1" stop-color="#18113E"/>
+    </linearGradient>
+    <radialGradient id="social-glow-a" cx="0" cy="0" r="1" gradientTransform="translate(360 282) rotate(18) scale(420 350)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F46E5" stop-opacity=".42"/>
+      <stop offset="1" stop-color="#4F46E5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="social-glow-b" cx="0" cy="0" r="1" gradientTransform="translate(80 610) rotate(-24) scale(370 250)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22C7D6" stop-opacity=".24"/>
+      <stop offset="1" stop-color="#22C7D6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="social-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M40 0H0v40" fill="none" stroke="#FFFFFF" stroke-opacity=".035"/>
+    </pattern>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#social-bg)"/>
+  <rect width="1280" height="640" fill="url(#social-grid)"/>
+  <rect width="1280" height="640" fill="url(#social-glow-a)"/>
+  <rect width="1280" height="640" fill="url(#social-glow-b)"/>
+
+  <g transform="translate(76 96) scale(.86)">
+    <g fill="#6C63FF">
+      <path d="M64 424 204 92c5-12 17-20 30-20h6v142l-55 60L88 424H64Z"/>
+      <path d="m448 424-140-332c-5-12-17-20-30-20h-6v142l55 60 97 150h24Z"/>
+    </g>
+    <g fill="#22C7D6">
+      <path d="m242 282 14-145 14 145-14 18-14-18Z"/>
+      <path d="m104 399 64-39 24 24-70 44-18-29Z" opacity=".9"/>
+      <path d="m153 338 51-31 19 20-55 34-15-23Z" opacity=".78"/>
+      <path d="m198 288 34-20 13 14-37 23-10-17Z" opacity=".66"/>
+    </g>
+  </g>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Arial, sans-serif">
+    <text x="570" y="178" fill="#8D93A8" font-size="17" font-weight="700" letter-spacing="4">OPEN AGENT SKILL</text>
+    <text x="570" y="258" fill="#F7F8FC" font-size="62" font-weight="760" letter-spacing="-2">Adaptive Prompt</text>
+    <text x="570" y="327" fill="#F7F8FC" font-size="62" font-weight="760" letter-spacing="-2">Architect</text>
+    <text x="570" y="392" fill="#C8CCDA" font-size="25" font-weight="500">From rough intent to finished work.</text>
+    <text x="570" y="442" fill="#8D93A8" font-size="17">Voice transcripts · streams of thought · coding tasks</text>
+    <rect x="570" y="482" width="470" height="3" rx="1.5" fill="#4F46E5"/>
+    <rect x="570" y="482" width="182" height="3" rx="1.5" fill="#22C7D6"/>
+    <text x="570" y="532" fill="#B9B5FF" font-size="15" font-weight="700" letter-spacing="2">CODEX · CHATGPT · MIT</text>
+  </g>
+</svg>
