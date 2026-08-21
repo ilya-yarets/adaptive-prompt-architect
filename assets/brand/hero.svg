@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="480" viewBox="0 0 1280 480" role="img" aria-labelledby="hero-title hero-desc">
+  <title id="hero-title">Adaptive Prompt Architect</title>
+  <desc id="hero-desc">From rough intent to finished work.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080C19"/>
+      <stop offset="0.55" stop-color="#10172D"/>
+      <stop offset="1" stop-color="#151238"/>
+    </linearGradient>
+    <radialGradient id="indigo-glow" cx="0" cy="0" r="1" gradientTransform="translate(385 205) rotate(24) scale(350 260)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#4F46E5" stop-opacity="0.35"/>
+      <stop offset="1" stop-color="#4F46E5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cyan-glow" cx="0" cy="0" r="1" gradientTransform="translate(126 390) rotate(-18) scale(290 210)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#22C7D6" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#22C7D6" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0v32" fill="none" stroke="#FFFFFF" stroke-opacity="0.035"/>
+    </pattern>
+    <linearGradient id="rule" x1="0" y1="0" x2="1" y2="0">
+      <stop stop-color="#22C7D6"/>
+      <stop offset="0.55" stop-color="#4F46E5"/>
+      <stop offset="1" stop-color="#4F46E5" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="480" rx="28" fill="url(#bg)"/>
+  <rect width="1280" height="480" rx="28" fill="url(#grid)"/>
+  <rect width="1280" height="480" rx="28" fill="url(#indigo-glow)"/>
+  <rect width="1280" height="480" rx="28" fill="url(#cyan-glow)"/>
+  <rect x="1" y="1" width="1278" height="478" rx="27" fill="none" stroke="#FFFFFF" stroke-opacity="0.08"/>
+
+  <g transform="translate(72 18) scale(.82)">
+    <g fill="#6C63FF">
+      <path d="M64 424 204 92c5-12 17-20 30-20h6v142l-55 60L88 424H64Z"/>
+      <path d="m448 424-140-332c-5-12-17-20-30-20h-6v142l55 60 97 150h24Z"/>
+    </g>
+    <g fill="#22C7D6">
+      <path d="m242 282 14-145 14 145-14 18-14-18Z"/>
+      <path d="m104 399 64-39 24 24-70 44-18-29Z" opacity=".9"/>
+      <path d="m153 338 51-31 19 20-55 34-15-23Z" opacity=".78"/>
+      <path d="m198 288 34-20 13 14-37 23-10-17Z" opacity=".66"/>
+    </g>
+  </g>
+
+  <g font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Arial, sans-serif">
+    <text x="548" y="118" fill="#8D93A8" font-size="15" font-weight="700" letter-spacing="4">AGENT SKILL · CODEX PLUGIN</text>
+    <text x="548" y="188" fill="#F7F8FC" font-size="55" font-weight="760" letter-spacing="-1.6">Adaptive Prompt</text>
+    <text x="548" y="249" fill="#F7F8FC" font-size="55" font-weight="760" letter-spacing="-1.6">Architect</text>
+    <rect x="548" y="277" width="460" height="3" rx="1.5" fill="url(#rule)"/>
+    <text x="548" y="325" fill="#C8CCDA" font-size="22" font-weight="500">From rough intent to finished work.</text>
+    <text x="548" y="361" fill="#8D93A8" font-size="16">Context-aware · scope-preserving · execution-first</text>
+  </g>
+
+  <g transform="translate(548 392)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Inter, Arial, sans-serif" font-size="13" font-weight="650">
+    <rect width="112" height="34" rx="17" fill="#4F46E5" fill-opacity=".16" stroke="#6C63FF" stroke-opacity=".42"/>
+    <text x="56" y="22" fill="#B9B5FF" text-anchor="middle">NO MCP</text>
+    <rect x="124" width="144" height="34" rx="17" fill="#22C7D6" fill-opacity=".11" stroke="#22C7D6" stroke-opacity=".36"/>
+    <text x="196" y="22" fill="#84E7EE" text-anchor="middle">NO TELEMETRY</text>
+    <rect x="280" width="140" height="34" rx="17" fill="#FFFFFF" fill-opacity=".055" stroke="#FFFFFF" stroke-opacity=".12"/>
+    <text x="350" y="22" fill="#C8CCDA" text-anchor="middle">MIT LICENSE</text>
+  </g>
+</svg>

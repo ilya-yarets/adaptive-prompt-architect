@@ -39,6 +39,9 @@
       "Turn my latest message into a copy-ready prompt only.",
       "Глубоко уточни мой последний запрос и выполни его."
     ],
-    "brandColor": "#4F46E5"
+    "brandColor": "#4F46E5",
+    "composerIcon": "./skills/prompt-architect/assets/icon.png",
+    "logo": "./skills/prompt-architect/assets/icon.png",
+    "logoDark": "./skills/prompt-architect/assets/icon.png"
   }
 }

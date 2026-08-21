@@ -1,60 +1,94 @@
-# Adaptive Prompt Architect
+<h1 align="center" aria-label="Adaptive Prompt Architect">
+  <img src="assets/brand/hero.svg" alt="Adaptive Prompt Architect — from rough intent to finished work" width="100%">
+</h1>
 
-[![Validate](https://github.com/ilya-yarets/adaptive-prompt-architect/actions/workflows/validate.yml/badge.svg)](https://github.com/ilya-yarets/adaptive-prompt-architect/actions/workflows/validate.yml)
-[![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+<p align="center">
+  <a href="https://github.com/ilya-yarets/adaptive-prompt-architect/actions/workflows/validate.yml"><img src="https://github.com/ilya-yarets/adaptive-prompt-architect/actions/workflows/validate.yml/badge.svg?branch=main" alt="Package checks"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-MIT-0B1020.svg" alt="MIT License"></a>
+</p>
 
-A context-aware Agent Skill for Codex and ChatGPT that turns rough requests, voice transcripts, typo-filled notes, and streams of thought into reliable execution.
+<p align="center">
+  <a href="#quick-start">Quick start</a> ·
+  <a href="#how-it-behaves">How it behaves</a> ·
+  <a href="#modes">Modes</a> ·
+  <a href="README.ru.md">Русская версия</a>
+</p>
 
-By default, `$prompt-architect` silently reconstructs the user's intent and completes the task. It does **not** print an intermediate rewritten prompt unless the user asks to see it. The internal rewrite never expands the user's permissions or scope.
+Adaptive Prompt Architect is an open, context-aware **Agent Skill** and skills-only **Codex plugin**. It acts as a prompt optimizer for rough requests, voice transcription and ASR errors, typo-heavy notes, streams of thought, and focused coding tasks—then completes the work without silently widening the user's scope.
 
-This repository contains an instructions-only, skills-only plugin. It has no MCP server, API key, telemetry, or background service.
+By default, `$prompt-architect` keeps its improved working specification internal and returns the finished result. Ask for `prompt only` when you want the rewritten prompt itself.
 
-## What makes it adaptive
+## Quick start
 
-- Corrects obvious grammar, transcription, and logical errors without casually changing names, numbers, terms, or negations.
-- Uses only relevant chat and explicitly connected workspace context.
-- Organizes a stream of thought without forcing every request into one template.
-- Adds roles, steps, constraints, sources, examples, and validation only when they improve the specific task.
-- Preserves professional freedom instead of over-constraining the executing model.
-- Asks the smallest useful question when ambiguity changes meaning, authorization, or the cost of an error.
-- Treats quoted or attached content as data unless the user explicitly makes it an instruction.
-- Adapts coding prompts for the named model or tool, including focused Codex Spark tasks.
+Install the skill from GitHub with the bundled Codex skill installer:
+
+```text
+$skill-installer Install the prompt-architect skill from https://github.com/ilya-yarets/adaptive-prompt-architect/tree/main/skills/prompt-architect
+```
+
+Then invoke it with a rough task:
+
+```text
+$prompt-architect deeply: this came from voice input so some words may be wrong — I need a small shared grocery prototype, maybe receipt photo or manual entry; the main goal is to test whether two people will actually use it
+```
+
+The skill reconstructs the intent, handles material ambiguity, and produces the useful result. It does not print a ceremonial meta-prompt first.
+
+## How it behaves
+
+```mermaid
+flowchart LR
+    A["Rough request<br/>voice · typos · fragments"] --> B["Adaptive refinement<br/>internal by default"]
+    B --> C["Finished work"]
+    B -->|"only when requested"| D["Copy-ready prompt"]
+```
+
+> [!IMPORTANT]
+> Internal refinement is not additional authorization. The skill cannot invent permission to send, delete, publish, purchase, deploy, or change external state.
+
+## One request, two useful outcomes
+
+```text
+$prompt-architect напиши три коротких названия для заметки о подготовке к поездке
+```
+
+Returns the three names directly.
+
+```text
+$prompt-architect только промпт: напиши три коротких названия для заметки о подготовке к поездке
+```
+
+Returns one copy-ready prompt and does not execute it.
+
+## Why it is adaptive
+
+- **Preserves invariants.** Names, numbers, terms, negations, constraints, and authorization boundaries are not casually rewritten.
+- **Understands noisy input.** Obvious grammar and ASR errors are repaired while uncertain meaning is surfaced instead of guessed.
+- **Uses context selectively.** It reads only the chat or explicitly connected workspace context that changes the result.
+- **Adds structure when useful.** Roles, steps, sources, examples, and checks appear only when they improve this particular task.
+- **Asks less, but asks well.** A compact question appears only when missing information materially changes the outcome or risk.
 
 ## Modes
 
 | Invocation | Behavior |
 | --- | --- |
 | `$prompt-architect <rough task>` | Silently refines the request and completes the task. |
-| `$prompt-architect quickly: ...` / `быстро` | Uses the smallest sufficient reconstruction. |
-| `$prompt-architect deeply: ...` / `глубоко` | Checks context, ambiguity, and risk more carefully without expanding scope. |
-| `$prompt-architect prompt only: ...` / `только промпт` | Returns one copy-ready prompt and does not execute it. |
-| `$prompt-architect show prompt: ...` / `покажи промпт` | Shows the improved prompt and does not execute it. |
-| `$prompt-architect show and execute: ...` / `покажи и выполни` | Shows the prompt first, then completes the task. |
-| `$prompt-architect for <model/tool>: ...` / `для <модели>` | Adapts the internal specification or prompt to the target. |
+| `quickly` / `быстро` | Uses the smallest sufficient reconstruction. |
+| `deeply` / `глубоко` | Checks context, ambiguity, and risk more carefully without expanding scope. |
+| `prompt only` / `только промпт` | Returns one copy-ready prompt and does not execute it. |
+| `show prompt` / `покажи промпт` | Shows the improved prompt and does not execute it. |
+| `show and execute` / `покажи и выполни` | Shows the prompt first, then completes the task. |
+| `for <model/tool>` / `для <модели>` | Adapts the specification or prompt to the named target. |
 
-Examples:
+## Safety boundary
 
-```text
-$prompt-architect deeply: this is from voice input maybe words are wrong, I need a small prototype where two people track groceries, maybe receipt photo or manual, main thing is test if we use it
-```
+“Silent” means only that the rewritten working specification is not displayed as a separate block. It does not hide required approvals, material assumptions, tool activity, or task results.
 
-```text
-$prompt-architect только промпт: подготовь мой последний запрос для Codex Spark
-```
+When ambiguity affects a name, number, negation, destination, irreversible action, target system, or cost, the skill stops and asks the smallest useful blocking question. Quoted and attached content is treated as data unless the user explicitly makes it an instruction.
 
-```text
-$prompt-architect покажи и выполни: придумай три коротких названия для этой заметки
-```
+## Installation and compatibility
 
-## Install from GitHub
-
-The easiest Codex route is to ask the bundled skill installer:
-
-```text
-$skill-installer Install the prompt-architect skill from https://github.com/ilya-yarets/adaptive-prompt-architect/tree/main/skills/prompt-architect
-```
-
-For a manual user-level installation:
+The GitHub installation path above is intended for Codex. For a manual user-level installation:
 
 ```bash
 git clone https://github.com/ilya-yarets/adaptive-prompt-architect.git
@@ -63,59 +97,42 @@ mkdir -p ~/.agents/skills
 ln -s "$PWD/skills/prompt-architect" ~/.agents/skills/prompt-architect
 ```
 
-Codex detects skill changes automatically. If the skill does not appear, restart Codex and invoke it with `$prompt-architect`.
+If the skill does not appear after installation, restart Codex and invoke `$prompt-architect` explicitly.
 
-The repository is already packaged as a skills-only plugin. It is not yet listed in the universal ChatGPT/Codex plugin directory; GitHub installation is the current distribution path.
+The repository also contains a valid skills-only plugin package for ChatGPT and Codex distribution. It is not yet listed in the universal plugin directory; GitHub skill installation is the current public route.
 
-## Safety boundary
+## Quality gates
 
-“Silent” means the improved working specification is not printed as a separate block. It does not hide required approvals, material assumptions, tool activity, or task results. The skill cannot create permission to send, delete, publish, purchase, deploy, or alter external state beyond what the user authorized.
-
-If a material ambiguity affects a name, number, negation, destination, irreversible action, or target system, the skill asks a compact blocking question instead of guessing.
-
-## Development and evaluation
-
-The repository includes behavior-oriented eval cases for:
-
-- silent default execution;
-- prompt-only and show-and-execute modes;
-- voice-transcription invariants;
-- streams of thought;
-- context-aware coding prompts;
-- destructive ambiguity;
-- quoted prompt-injection content;
-- precise trigger and non-trigger routing.
-
-Run the repository checks with:
+The package ships with structural validation and behavior-oriented eval specifications.
 
 ```bash
 python3 scripts/validate.py
 ```
 
-The eval files are specifications for representative model tests, not claims of deterministic model output.
+| Gate | What it checks |
+| --- | --- |
+| Package validator | Manifest, assets, metadata, JSON, SVG, PNG dimensions, public paths, and required files. |
+| Trigger routing | Representative requests that should and should not select the skill. |
+| Behavior evals | Silent execution, prompt-only mode, ASR invariants, destructive ambiguity, and quoted prompt injection. |
 
-## Русский
+The eval files specify observable expectations; they are not claims that model wording is deterministic.
 
-`$prompt-architect` — адаптивный архитектор намерения. Он понимает сырой запрос, исправляет очевидные ошибки голоса или текста, использует релевантный контекст и по умолчанию сразу выполняет задачу, не показывая промежуточный переписанный промпт.
-
-Быстрый вызов:
-
-```text
-$prompt-architect глубоко: [сырой запрос, голосовая расшифровка или поток мыслей]
-```
-
-Если нужен именно текст промпта для копирования:
+## Package contents
 
 ```text
-$prompt-architect только промпт: [черновик]
+adaptive-prompt-architect/
+├── .codex-plugin/plugin.json
+├── assets/brand/
+├── evals/
+├── scripts/validate.py
+└── skills/prompt-architect/
+    ├── SKILL.md
+    ├── agents/openai.yaml
+    └── assets/
 ```
 
-Если хотите увидеть улучшенный промпт и затем получить результат:
+This is an instructions-only package: no MCP server, API key, telemetry, or background service.
 
-```text
-$prompt-architect покажи и выполни: [черновик]
-```
+---
 
-## License
-
-[MIT](LICENSE). See [Privacy](PRIVACY.md), [Terms](TERMS.md), and [Support](SUPPORT.md).
+Created by [Ilia](https://github.com/ilya-yarets) · [MIT License](LICENSE) · [Privacy](PRIVACY.md) · [Terms](TERMS.md) · [Support](SUPPORT.md)

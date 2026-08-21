@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title desc">
+  <title id="title">Adaptive Prompt Architect</title>
+  <desc id="desc">Three rough fragments converge into a precise beam inside an architectural mark.</desc>
+  <g fill="#4F46E5">
+    <path d="M64 424 204 92c5-12 17-20 30-20h6v142l-55 60L88 424H64Z"/>
+    <path d="m448 424-140-332c-5-12-17-20-30-20h-6v142l55 60 97 150h24Z"/>
+  </g>
+  <g fill="#22C7D6">
+    <path d="m242 282 14-145 14 145-14 18-14-18Z"/>
+    <path d="m104 399 64-39 24 24-70 44-18-29Z"/>
+    <path d="m153 338 51-31 19 20-55 34-15-23Z"/>
+    <path d="m198 288 34-20 13 14-37 23-10-17Z"/>
+  </g>
+</svg>
