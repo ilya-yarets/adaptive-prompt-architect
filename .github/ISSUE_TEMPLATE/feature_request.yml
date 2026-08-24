@@ -1,0 +1,31 @@
+name: Focused improvement
+description: Propose a small behavior, eval, documentation, or packaging improvement
+title: "[Idea]: "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What real request or failure mode should improve?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Smallest useful change
+      description: Explain why this belongs in the shared skill rather than a one-off prompt.
+    validations:
+      required: true
+  - type: textarea
+    id: example
+    attributes:
+      label: Synthetic example
+      description: Do not include private conversation or workspace content.
+    validations:
+      required: true
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: Tradeoffs
+      description: Note possible prompt bloat, rigid behavior, compatibility, or regression risk.

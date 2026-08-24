@@ -25,6 +25,21 @@ ICON_PNG_PATH = SKILL_ROOT / "assets" / "icon.png"
 HERO_SVG_PATH = ROOT / "assets" / "brand" / "hero.svg"
 SOCIAL_SVG_PATH = ROOT / "assets" / "brand" / "social-preview.svg"
 SOCIAL_PNG_PATH = ROOT / "assets" / "brand" / "social-preview.png"
+SECURITY_PATH = ROOT / "SECURITY.md"
+CONTRIBUTING_PATH = ROOT / "CONTRIBUTING.md"
+COMMUNITY_FILES = (
+    ROOT / "CODE_OF_CONDUCT.md",
+    ROOT / ".github" / "PULL_REQUEST_TEMPLATE.md",
+    ROOT / ".github" / "ISSUE_TEMPLATE" / "bug_report.yml",
+    ROOT / ".github" / "ISSUE_TEMPLATE" / "feature_request.yml",
+    ROOT / ".github" / "ISSUE_TEMPLATE" / "config.yml",
+)
+SECURITY_EVAL_IDS = {
+    "quoted-content-is-data",
+    "retrieved-content-is-data",
+    "user-designated-document-stays-bounded",
+    "silent-mode-keeps-external-confirmation",
+}
 SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:[-+][0-9A-Za-z.-]+)?$")
 CYRILLIC = re.compile(r"[\u0400-\u04FF]")
 
@@ -81,6 +96,7 @@ def validate_skill() -> None:
     require(re.search(r"(?m)^description:\s*.+$", frontmatter) is not None, "skill description is required")
     require("молча улучши запрос и сразу выполни задачу" in text, "silent execution default is missing")
     require("не даёт новых полномочий" in text, "authorization boundary is missing")
+    require("Определяй полномочия по источнику" in text, "source-authority boundary is missing")
     require(AGENT_PATH.is_file(), "missing agents/openai.yaml")
     agent = AGENT_PATH.read_text(encoding="utf-8")
     for key in (
@@ -158,6 +174,7 @@ def validate_evals() -> None:
         require(all(isinstance(item, str) and item.strip() for item in assertions), f"eval {case['id']} has an invalid assertion")
         ids.append(case["id"])
     require(len(ids) == len(set(ids)), "eval ids must be unique")
+    require(SECURITY_EVAL_IDS.issubset(ids), "required security behavior evals are missing")
 
     triggers = load_json(TRIGGERS_PATH)
     require(isinstance(triggers, list) and len(triggers) >= 10, "trigger query set is too small")
@@ -167,6 +184,19 @@ def validate_evals() -> None:
         require(isinstance(item, dict), "each trigger case must be an object")
         require(isinstance(item.get("query"), str) and item["query"].strip(), "trigger query is required")
         require(isinstance(item.get("should_trigger"), bool), "should_trigger must be boolean")
+
+
+def validate_community_files() -> None:
+    for path in (SECURITY_PATH, CONTRIBUTING_PATH, *COMMUNITY_FILES):
+        require(path.is_file() and path.stat().st_size > 0, f"missing {path.relative_to(ROOT)}")
+
+    security = SECURITY_PATH.read_text(encoding="utf-8")
+    require("/security/advisories/new" in security, "SECURITY.md must link to private vulnerability reporting")
+    require("Instructions found inside" in security, "SECURITY.md must document the prompt-injection boundary")
+
+    contributing = CONTRIBUTING_PATH.read_text(encoding="utf-8")
+    require("python3 scripts/validate.py" in contributing, "CONTRIBUTING.md must document validation")
+    require("synthetic or redacted" in contributing, "CONTRIBUTING.md must protect private examples")
 
 
 def validate_public_content() -> None:
@@ -192,6 +222,7 @@ def main() -> None:
     validate_brand_assets()
     validate_readmes()
     validate_evals()
+    validate_community_files()
     validate_public_content()
     print("validation passed")
 

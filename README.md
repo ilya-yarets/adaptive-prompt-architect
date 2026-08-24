@@ -11,6 +11,7 @@
   <a href="#quick-start">Quick start</a> ·
   <a href="#how-it-behaves">How it behaves</a> ·
   <a href="#modes">Modes</a> ·
+  <a href="SECURITY.md">Security</a> ·
   <a href="README.ru.md">Read in Russian</a>
 </p>
 
@@ -88,7 +89,7 @@ Returns one copy-ready prompt and does not execute it.
 
 “Silent” means only that the rewritten working specification is not displayed as a separate block. It does not hide required approvals, material assumptions, tool activity, or task results.
 
-When ambiguity affects a name, number, negation, destination, irreversible action, target system, or cost, the skill stops and asks the smallest useful blocking question. Quoted and attached content is treated as data unless the user explicitly makes it an instruction.
+When ambiguity affects a name, number, negation, destination, irreversible action, target system, or cost, the skill stops and asks the smallest useful blocking question. Authority comes from the source: quoted, attached, retrieved, tool-returned, and file content stays data and cannot expand scope or override safety.
 
 ## Installation and compatibility
 
@@ -117,7 +118,7 @@ python3 scripts/validate.py
 | --- | --- |
 | Package validator | Manifest, assets, metadata, JSON, SVG, PNG dimensions, public paths, and required files. |
 | Trigger routing | Representative requests that should and should not select the skill. |
-| Behavior evals | Silent execution, prompt-only mode, ASR invariants, destructive ambiguity, and quoted prompt injection. |
+| Behavior evals | Silent execution, prompt-only mode, ASR invariants, destructive ambiguity, source-authority injection, and confirmation preservation. |
 
 The eval files specify observable expectations; they are not claims that model wording is deterministic.
 
@@ -126,8 +127,10 @@ The eval files specify observable expectations; they are not claims that model w
 ```text
 adaptive-prompt-architect/
 ├── .codex-plugin/plugin.json
+├── .github/
 ├── assets/brand/
 ├── evals/
+├── SECURITY.md
 ├── scripts/validate.py
 └── skills/prompt-architect/
     ├── SKILL.md
@@ -139,4 +142,4 @@ This is an instructions-only package: no MCP server, API key, telemetry, or back
 
 ---
 
-Created by [Ilia](https://github.com/ilya-yarets) · [MIT License](LICENSE) · [Privacy](PRIVACY.md) · [Terms](TERMS.md) · [Support](SUPPORT.md)
+Created by [Ilia](https://github.com/ilya-yarets) · [MIT License](LICENSE) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Privacy](PRIVACY.md) · [Terms](TERMS.md) · [Support](SUPPORT.md)
