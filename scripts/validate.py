@@ -26,6 +26,7 @@ HERO_SVG_PATH = ROOT / "assets" / "brand" / "hero.svg"
 SOCIAL_SVG_PATH = ROOT / "assets" / "brand" / "social-preview.svg"
 SOCIAL_PNG_PATH = ROOT / "assets" / "brand" / "social-preview.png"
 SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:[-+][0-9A-Za-z.-]+)?$")
+CYRILLIC = re.compile(r"[\u0400-\u04FF]")
 
 
 def load_json(path: Path):
@@ -131,6 +132,7 @@ def validate_readmes() -> None:
     require('src="assets/brand/hero.svg"' in english, "README.md must display the brand hero")
     require("README.ru.md" in english, "README.md must link to the Russian version")
     require("README.md" in russian, "README.ru.md must link to the English version")
+    require(CYRILLIC.search(english) is None, "README.md must remain English-only")
     for path, text in ((README_PATH, english), (README_RU_PATH, russian)):
         markdown_links = re.findall(r"\[[^\]]+\]\(([^)]+)\)", text)
         html_links = re.findall(r"(?:href|src)=[\"']([^\"']+)[\"']", text)
