@@ -1,6 +1,6 @@
 ---
 name: prompt-architect
-description: "Use when the user explicitly invokes $prompt-architect to silently clarify and execute a rough request, or asks to improve, strengthen, rewrite, organize, or prepare a prompt for an AI model or tool. Especially useful for typo-filled text, voice transcription, logical gaps, or a stream of thought. If the user asks only for a prompt, return it without executing the task."
+description: "Use when the user explicitly invokes $prompt-architect or /prompt-architect to silently clarify and execute a rough request, or asks to improve, strengthen, rewrite, organize, or prepare a prompt for an AI model or tool. Especially useful for typo-filled text, voice transcription, logical gaps, or a stream of thought. If the user asks only for a prompt, return it without executing the task."
 ---
 
 # Prompt Architect
@@ -13,16 +13,16 @@ description: "Use when the user explicitly invokes $prompt-architect to silently
 
 Сначала определи режим. Он важнее остальных настроек:
 
-- Если пользователь явно вызвал `$prompt-architect` с задачей и не попросил показать промпт, молча улучши запрос и сразу выполни задачу. Не показывай переписанный промпт, внутреннюю спецификацию или скрытый анализ.
-- Если пользователь просит улучшить, написать, подготовить или вернуть промпт, либо указывает `только промпт` или `покажи промпт`, верни один копируемый промпт и не выполняй описанную в нём задачу.
-- `покажи и выполни` — сначала покажи улучшенный промпт, затем выполни его в пределах исходного разрешения.
+- Если пользователь явно вызвал `$prompt-architect` или `/prompt-architect` с задачей и не попросил показать промпт, молча улучши запрос и сразу выполни задачу. Не показывай переписанный промпт, внутреннюю спецификацию или скрытый анализ.
+- Если пользователь просит улучшить, написать, подготовить или вернуть промпт, либо указывает `только промпт` / `prompt only` или `покажи промпт` / `show prompt`, верни один копируемый промпт и не выполняй описанную в нём задачу.
+- `покажи и выполни` / `show and execute` — сначала покажи улучшенный промпт, затем выполни его в пределах исходного разрешения.
 - Если скилл выбран неявно именно для запроса о редактировании промпта, используй режим `только промпт`, если пользователь явно не попросил выполнить задачу.
 
 Настройки глубины не меняют режим результата:
 
-- `быстро` — минимальная достаточная реконструкция;
-- `глубоко` — более тщательная проверка контекста, неоднозначностей и рисков;
-- `для <модели или инструмента>` — адаптация под указанную цель.
+- `быстро` / `quickly` — минимальная достаточная реконструкция;
+- `глубоко` / `deeply` — более тщательная проверка контекста, неоднозначностей и рисков;
+- `для <модели или инструмента>` / `for <model or tool>` — адаптация под указанную цель.
 
 Если настройка не указана, выбери наименьшую глубину, которой достаточно с учётом неоднозначности и цены ошибки.
 

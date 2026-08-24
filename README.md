@@ -21,11 +21,11 @@ Good ideas rarely arrive as polished prompts. They arrive as voice notes, fragme
 
 **Adaptive Prompt Architect turns that rough input into clear, actionable intent—then either returns a focused, copy-ready prompt or gets the work done.** It adds only the structure the task needs, preserves your constraints, and avoids rigid, overloaded templates.
 
-It is an open, context-aware **Agent Skill** and skills-only **Codex plugin**. By default, `$prompt-architect` keeps the refined working specification internal and returns the finished result. Use `prompt only` when you want the rewritten prompt itself.
+It is an open, context-aware **Agent Skill with documented setup for Codex, Claude Code, and Cursor**, plus a skills-only Codex plugin. By default, prompt-architect keeps the refined working specification internal and returns the finished result. Use `prompt only` when you want the rewritten prompt itself.
 
 ## Quick start
 
-Install the skill from GitHub with the bundled Codex skill installer:
+With Codex, install the skill from GitHub using the bundled skill installer:
 
 ```text
 $skill-installer Install the prompt-architect skill from https://github.com/ilya-yarets/adaptive-prompt-architect/tree/main/skills/prompt-architect
@@ -37,7 +37,7 @@ Then invoke it with a rough task:
 $prompt-architect deeply: this came from voice input so some words may be wrong — I need a small shared grocery prototype, maybe receipt photo or manual entry; the main goal is to test whether two people will actually use it
 ```
 
-The skill reconstructs the intent, handles material ambiguity, and returns the useful result—without a mandatory prompt preamble.
+In Claude Code or Cursor, use the same request with `/prompt-architect`; their setup is documented below. The skill reconstructs the intent, handles material ambiguity, and returns the useful result—without a mandatory prompt preamble.
 
 ## How it behaves
 
@@ -75,15 +75,17 @@ Returns one copy-ready prompt and does not execute it.
 
 ## Modes
 
+In the table, `<invoke>` means `$prompt-architect` in Codex or `/prompt-architect` in Claude Code and Cursor. The modes are otherwise identical.
+
 | Invocation | Behavior |
 | --- | --- |
-| `$prompt-architect <rough task>` | Silently refines the request and completes the task. |
-| `$prompt-architect quickly: <rough task>` | Uses the smallest sufficient reconstruction. |
-| `$prompt-architect deeply: <rough task>` | Checks context, ambiguity, and risk more carefully without expanding scope. |
-| `$prompt-architect prompt only: <rough task>` | Returns one copy-ready prompt and does not execute it. |
-| `$prompt-architect show prompt: <rough task>` | Shows the improved prompt and does not execute it. |
-| `$prompt-architect show and execute: <rough task>` | Shows the prompt first, then completes the task. |
-| `$prompt-architect for <model/tool>: <rough task>` | Adapts the specification or prompt to the named target. |
+| `<invoke> <rough task>` | Silently refines the request and completes the task. |
+| `<invoke> quickly: <rough task>` | Uses the smallest sufficient reconstruction. |
+| `<invoke> deeply: <rough task>` | Checks context, ambiguity, and risk more carefully without expanding scope. |
+| `<invoke> prompt only: <rough task>` | Returns one copy-ready prompt and does not execute it. |
+| `<invoke> show prompt: <rough task>` | Shows the improved prompt and does not execute it. |
+| `<invoke> show and execute: <rough task>` | Shows the prompt first, then completes the task. |
+| `<invoke> for <model/tool>: <rough task>` | Adapts the specification or prompt to the named target. |
 
 ## Safety boundary
 
@@ -93,18 +95,47 @@ When ambiguity affects a name, number, negation, destination, irreversible actio
 
 ## Installation and compatibility
 
-The GitHub installation path above is intended for Codex. For a manual user-level installation:
+The same `SKILL.md` follows the open [Agent Skills specification](https://agentskills.io/specification) on every host; only discovery and explicit invocation differ.
+
+| Agent | User-level discovery path | Explicit invocation |
+| --- | --- | --- |
+| [Codex](https://learn.chatgpt.com/docs/build-skills) | `~/.agents/skills/prompt-architect`, or `~/.codex/skills/prompt-architect` via the bundled installer | `$prompt-architect` |
+| [Claude Code](https://code.claude.com/docs/en/skills) | `~/.claude/skills/prompt-architect` | `/prompt-architect` |
+| [Cursor](https://cursor.com/docs/skills) | `~/.agents/skills/prompt-architect` | `/prompt-architect` |
+
+Use the Codex installer from Quick start above. It installs under `$CODEX_HOME/skills` (normally `~/.codex/skills`); Cursor discovers both that compatibility path and `~/.agents/skills` automatically. Cursor-only users can instead open **Customize → Rules → Add Rule → Remote Rule (GitHub)** and enter this repository URL.
+
+To reuse an existing Codex installation in Claude Code on macOS or Linux, use this guarded link:
 
 ```bash
-git clone https://github.com/ilya-yarets/adaptive-prompt-architect.git
-cd adaptive-prompt-architect
-mkdir -p ~/.agents/skills
-ln -s "$PWD/skills/prompt-architect" ~/.agents/skills/prompt-architect
+agents_skill="$HOME/.agents/skills/prompt-architect"
+codex_skill="${CODEX_HOME:-$HOME/.codex}/skills/prompt-architect"
+claude_skill="$HOME/.claude/skills/prompt-architect"
+shared_skill=""
+
+if [ -f "$agents_skill/SKILL.md" ]; then
+  shared_skill="$agents_skill"
+elif [ -f "$codex_skill/SKILL.md" ]; then
+  shared_skill="$codex_skill"
+else
+  printf '%s\n' "No local prompt-architect installation found."
+fi
+
+if [ -n "$shared_skill" ]; then
+  if [ -e "$claude_skill" ] || [ -L "$claude_skill" ]; then
+    printf 'Already exists: %s\n' "$claude_skill"
+  else
+    mkdir -p "$HOME/.claude/skills"
+    ln -s "$shared_skill" "$claude_skill"
+  fi
+fi
 ```
 
-If the skill does not appear after installation, restart Codex and invoke `$prompt-architect` explicitly.
+Claude-only users can clone the repository and link its `skills/prompt-architect` folder into the Claude discovery path with the same existence check. On Windows, or when symlinks are undesirable, copy that skill folder into the documented host path only after checking that the target does not already exist.
 
-The repository also contains a valid skills-only plugin package for ChatGPT and Codex distribution. It is not yet listed in the universal plugin directory; GitHub skill installation is the current public route.
+If the skill does not appear, start a new agent session and invoke it explicitly. Host-runtime behavior still depends on the installed host version and model; the repository validates the shared format, routing fixtures, and behavioral specifications rather than claiming deterministic output across products.
+
+The repository also contains a valid skills-only plugin package for ChatGPT and Codex distribution. Other Agent Skills-compatible hosts may accept the same folder, but they are outside the current documented support matrix.
 
 ## Quality gates
 

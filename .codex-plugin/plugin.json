@@ -19,7 +19,10 @@
     "voice transcription",
     "ASR",
     "Codex",
-    "ChatGPT"
+    "ChatGPT",
+    "Claude Code",
+    "Cursor",
+    "Agent Skills"
   ],
   "skills": "./skills/",
   "interface": {

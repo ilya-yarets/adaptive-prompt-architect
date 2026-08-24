@@ -1,5 +1,6 @@
 [
   {"query": "$prompt-architect собери мой сырой запрос и сразу сделай задачу", "should_trigger": true},
+  {"query": "/prompt-architect organize this voice transcript and complete the task", "should_trigger": true},
   {"query": "молча улучши мой запрос с учетом контекста и выполни его", "should_trigger": true},
   {"query": "поправь этот сырой промпт и учти что выше мы уже выбрали формат", "should_trigger": true},
   {"query": "усиль мой запрос для Codex, но не выполняй саму задачу", "should_trigger": true},
