@@ -1,7 +1,7 @@
 {
   "name": "adaptive-prompt-architect",
-  "version": "0.1.0",
-  "description": "Context-aware Agent Skill that silently refines rough requests, voice transcripts, and streams of thought, then completes the task without changing user intent.",
+  "version": "0.1.1",
+  "description": "Turns rough requests, voice transcripts, and streams of thought into focused prompts or finished work without prompt bloat or scope creep.",
   "author": {
     "name": "Ilia",
     "url": "https://github.com/ilya-yarets"
@@ -25,7 +25,7 @@
   "interface": {
     "displayName": "Adaptive Prompt Architect",
     "shortDescription": "Refines rough requests and completes them",
-    "longDescription": "Turns typo-filled notes, voice transcripts, and streams of thought into a minimal internal execution specification, then completes the task. Prompt-only and show-and-execute modes remain available.",
+    "longDescription": "Turns typo-filled notes, voice transcripts, and streams of thought into focused prompts or finished work. It adds only useful structure, preserves intent, and avoids prompt bloat.",
     "developerName": "Ilia",
     "category": "Productivity",
     "capabilities": [
@@ -37,7 +37,7 @@
     "defaultPrompt": [
       "Silently refine my rough request using relevant context, then complete the task.",
       "Turn my latest message into a copy-ready prompt only.",
-      "Глубоко уточни мой последний запрос и выполни его."
+      "Deeply refine my latest request, then complete it without expanding its scope."
     ],
     "brandColor": "#4F46E5",
     "composerIcon": "./skills/prompt-architect/assets/icon.png",

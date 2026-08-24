@@ -11,12 +11,16 @@
   <a href="#quick-start">Quick start</a> ·
   <a href="#how-it-behaves">How it behaves</a> ·
   <a href="#modes">Modes</a> ·
-  <a href="README.ru.md">Русская версия</a>
+  <a href="README.ru.md">Read in Russian</a>
 </p>
 
-Adaptive Prompt Architect is an open, context-aware **Agent Skill** and skills-only **Codex plugin**. It acts as a prompt optimizer for rough requests, voice transcription and ASR errors, typo-heavy notes, streams of thought, and focused coding tasks—then completes the work without silently widening the user's scope.
+<p align="center"><strong>Messy thoughts in. Clear intent out. No prompt bloat.</strong></p>
 
-By default, `$prompt-architect` keeps its improved working specification internal and returns the finished result. Ask for `prompt only` when you want the rewritten prompt itself.
+Good ideas rarely arrive as polished prompts. They arrive as voice notes, fragments, typos, and streams of thought.
+
+**Adaptive Prompt Architect turns that rough input into clear, actionable intent—then either returns a focused, copy-ready prompt or gets the work done.** It adds only the structure the task needs, preserves your constraints, and avoids rigid, overloaded templates.
+
+It is an open, context-aware **Agent Skill** and skills-only **Codex plugin**. By default, `$prompt-architect` keeps the refined working specification internal and returns the finished result. Use `prompt only` when you want the rewritten prompt itself.
 
 ## Quick start
 
@@ -32,7 +36,7 @@ Then invoke it with a rough task:
 $prompt-architect deeply: this came from voice input so some words may be wrong — I need a small shared grocery prototype, maybe receipt photo or manual entry; the main goal is to test whether two people will actually use it
 ```
 
-The skill reconstructs the intent, handles material ambiguity, and produces the useful result. It does not print a ceremonial meta-prompt first.
+The skill reconstructs the intent, handles material ambiguity, and returns the useful result—without a mandatory prompt preamble.
 
 ## How it behaves
 
@@ -49,13 +53,13 @@ flowchart LR
 ## One request, two useful outcomes
 
 ```text
-$prompt-architect напиши три коротких названия для заметки о подготовке к поездке
+$prompt-architect Give me three short titles for a note about planning a trip
 ```
 
 Returns the three names directly.
 
 ```text
-$prompt-architect только промпт: напиши три коротких названия для заметки о подготовке к поездке
+$prompt-architect prompt only: Give me three short titles for a note about planning a trip
 ```
 
 Returns one copy-ready prompt and does not execute it.
@@ -73,12 +77,12 @@ Returns one copy-ready prompt and does not execute it.
 | Invocation | Behavior |
 | --- | --- |
 | `$prompt-architect <rough task>` | Silently refines the request and completes the task. |
-| `quickly` / `быстро` | Uses the smallest sufficient reconstruction. |
-| `deeply` / `глубоко` | Checks context, ambiguity, and risk more carefully without expanding scope. |
-| `prompt only` / `только промпт` | Returns one copy-ready prompt and does not execute it. |
-| `show prompt` / `покажи промпт` | Shows the improved prompt and does not execute it. |
-| `show and execute` / `покажи и выполни` | Shows the prompt first, then completes the task. |
-| `for <model/tool>` / `для <модели>` | Adapts the specification or prompt to the named target. |
+| `$prompt-architect quickly: <rough task>` | Uses the smallest sufficient reconstruction. |
+| `$prompt-architect deeply: <rough task>` | Checks context, ambiguity, and risk more carefully without expanding scope. |
+| `$prompt-architect prompt only: <rough task>` | Returns one copy-ready prompt and does not execute it. |
+| `$prompt-architect show prompt: <rough task>` | Shows the improved prompt and does not execute it. |
+| `$prompt-architect show and execute: <rough task>` | Shows the prompt first, then completes the task. |
+| `$prompt-architect for <model/tool>: <rough task>` | Adapts the specification or prompt to the named target. |
 
 ## Safety boundary
 
