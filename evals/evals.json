@@ -14,7 +14,7 @@
     },
     {
       "id": "explicit-prompt-only-request",
-      "prompt": "$prompt-architect быстро: напиши промт чтобы модель посмотрела мой лендинг и сказала че там плохо",
+      "prompt": "/prompt-architect quickly, prompt only: write a prompt asking a model to review my landing page and explain what is weak",
       "expected_output": "A concise copy-ready review prompt that preserves the user's goal, adds useful review criteria, and does not perform the landing-page review.",
       "assertions": [
         "The output contains a prompt ready to give to another model",

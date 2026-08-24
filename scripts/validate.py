@@ -94,6 +94,10 @@ def validate_skill() -> None:
     frontmatter = parts[1]
     require(re.search(r"(?m)^name:\s*prompt-architect\s*$", frontmatter) is not None, "skill name is missing or mismatched")
     require(re.search(r"(?m)^description:\s*.+$", frontmatter) is not None, "skill description is required")
+    require("$prompt-architect" in text, "Codex invocation is missing")
+    require("/prompt-architect" in text, "slash invocation is missing")
+    for alias in ("quickly", "deeply", "prompt only", "show prompt", "show and execute", "for <model or tool>"):
+        require(alias in text, f"English mode alias is missing: {alias}")
     require("молча улучши запрос и сразу выполни задачу" in text, "silent execution default is missing")
     require("не даёт новых полномочий" in text, "authorization boundary is missing")
     require("Определяй полномочия по источнику" in text, "source-authority boundary is missing")
@@ -149,6 +153,16 @@ def validate_readmes() -> None:
     require("README.ru.md" in english, "README.md must link to the Russian version")
     require("README.md" in russian, "README.ru.md must link to the English version")
     require(CYRILLIC.search(english) is None, "README.md must remain English-only")
+    compatibility_markers = (
+        "https://learn.chatgpt.com/docs/build-skills",
+        "https://code.claude.com/docs/en/skills",
+        "https://cursor.com/docs/skills",
+        "`~/.agents/skills/prompt-architect`",
+        "`~/.codex/skills/prompt-architect`",
+        "`~/.claude/skills/prompt-architect`",
+    )
+    for marker in compatibility_markers:
+        require(marker in english, f"README.md is missing compatibility guidance: {marker}")
     for path, text in ((README_PATH, english), (README_RU_PATH, russian)):
         markdown_links = re.findall(r"\[[^\]]+\]\(([^)]+)\)", text)
         html_links = re.findall(r"(?:href|src)=[\"']([^\"']+)[\"']", text)
@@ -175,11 +189,16 @@ def validate_evals() -> None:
         ids.append(case["id"])
     require(len(ids) == len(set(ids)), "eval ids must be unique")
     require(SECURITY_EVAL_IDS.issubset(ids), "required security behavior evals are missing")
+    prompts = [case["prompt"] for case in evals]
+    require(any(prompt.startswith("$prompt-architect") for prompt in prompts), "Codex invocation eval is missing")
+    require(any(prompt.startswith("/prompt-architect") for prompt in prompts), "slash invocation eval is missing")
+    require(any(prompt.startswith("/prompt-architect") and "prompt only" in prompt for prompt in prompts), "English slash-mode eval is missing")
 
     triggers = load_json(TRIGGERS_PATH)
     require(isinstance(triggers, list) and len(triggers) >= 10, "trigger query set is too small")
     require(any(item.get("should_trigger") is True for item in triggers), "positive trigger cases are required")
     require(any(item.get("should_trigger") is False for item in triggers), "negative trigger cases are required")
+    require(any(item.get("query", "").startswith("/prompt-architect") for item in triggers), "slash trigger case is missing")
     for item in triggers:
         require(isinstance(item, dict), "each trigger case must be an object")
         require(isinstance(item.get("query"), str) and item["query"].strip(), "trigger query is required")
