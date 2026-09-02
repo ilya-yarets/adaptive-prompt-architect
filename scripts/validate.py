@@ -40,6 +40,12 @@ SECURITY_EVAL_IDS = {
     "user-designated-document-stays-bounded",
     "silent-mode-keeps-external-confirmation",
 }
+CONTEXT_ENGINEERING_EVAL_IDS = {
+    "legacy-scaffolding-debloat",
+    "examples-preserve-real-contract",
+    "progressive-reference-use",
+    "proportionate-validation-no-ritual",
+}
 SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:[-+][0-9A-Za-z.-]+)?$")
 CYRILLIC = re.compile(r"[\u0400-\u04FF]")
 
@@ -189,6 +195,7 @@ def validate_evals() -> None:
         ids.append(case["id"])
     require(len(ids) == len(set(ids)), "eval ids must be unique")
     require(SECURITY_EVAL_IDS.issubset(ids), "required security behavior evals are missing")
+    require(CONTEXT_ENGINEERING_EVAL_IDS.issubset(ids), "required context-engineering evals are missing")
     prompts = [case["prompt"] for case in evals]
     require(any(prompt.startswith("$prompt-architect") for prompt in prompts), "Codex invocation eval is missing")
     require(any(prompt.startswith("/prompt-architect") for prompt in prompts), "slash invocation eval is missing")
