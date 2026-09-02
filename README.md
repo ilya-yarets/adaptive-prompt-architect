@@ -174,4 +174,4 @@ This is an instructions-only package: no MCP server, API key, telemetry, or back
 
 ---
 
-Created by [Ilia](https://github.com/ilya-yarets) · [MIT License](LICENSE) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Privacy](PRIVACY.md) · [Terms](TERMS.md) · [Support](SUPPORT.md)
+Created by [Ilia](https://github.com/ilya-yarets) · [Changelog](CHANGELOG.md) · [MIT License](LICENSE) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Privacy](PRIVACY.md) · [Terms](TERMS.md) · [Support](SUPPORT.md)

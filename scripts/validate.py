@@ -20,6 +20,7 @@ EVALS_PATH = ROOT / "evals" / "evals.json"
 TRIGGERS_PATH = ROOT / "evals" / "trigger-queries.json"
 README_PATH = ROOT / "README.md"
 README_RU_PATH = ROOT / "README.ru.md"
+CHANGELOG_PATH = ROOT / "CHANGELOG.md"
 ICON_SVG_PATH = SKILL_ROOT / "assets" / "icon.svg"
 ICON_PNG_PATH = SKILL_ROOT / "assets" / "icon.png"
 HERO_SVG_PATH = ROOT / "assets" / "brand" / "hero.svg"
@@ -158,6 +159,8 @@ def validate_readmes() -> None:
     require('src="assets/brand/hero.svg"' in english, "README.md must display the brand hero")
     require("README.ru.md" in english, "README.md must link to the Russian version")
     require("README.md" in russian, "README.ru.md must link to the English version")
+    require("CHANGELOG.md" in english, "README.md must link to the changelog")
+    require("CHANGELOG.md" in russian, "README.ru.md must link to the changelog")
     require(CYRILLIC.search(english) is None, "README.md must remain English-only")
     compatibility_markers = (
         "https://learn.chatgpt.com/docs/build-skills",
@@ -177,6 +180,14 @@ def validate_readmes() -> None:
             if re.match(r"(?:https?://|#|mailto:)", target):
                 continue
             require((ROOT / target).exists(), f"{path.name} links to missing {target}")
+
+
+def validate_changelog() -> None:
+    require(CHANGELOG_PATH.is_file(), "missing CHANGELOG.md")
+    manifest = load_json(MANIFEST_PATH)
+    version = manifest.get("version")
+    changelog = CHANGELOG_PATH.read_text(encoding="utf-8")
+    require(f"## [{version}]" in changelog, "CHANGELOG.md must describe the package version")
 
 
 def validate_evals() -> None:
@@ -247,6 +258,7 @@ def main() -> None:
     validate_skill()
     validate_brand_assets()
     validate_readmes()
+    validate_changelog()
     validate_evals()
     validate_community_files()
     validate_public_content()
