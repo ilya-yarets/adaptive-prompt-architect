@@ -69,8 +69,9 @@ Returns one copy-ready prompt and does not execute it.
 
 - **Preserves invariants.** Names, numbers, terms, negations, constraints, and authorization boundaries are not casually rewritten.
 - **Understands noisy input.** Obvious grammar and ASR errors are repaired while uncertain meaning is surfaced instead of guessed.
-- **Uses context selectively.** It reads only the chat or explicitly connected workspace context that changes the result.
-- **Adds structure when useful.** Roles, steps, sources, examples, and checks appear only when they improve this particular task.
+- **Starts from the outcome.** It defines what success looks like without prescribing a path the agent can choose better from context.
+- **Uses context progressively.** It points to relevant project conventions and references without loading or copying everything up front.
+- **Keeps only useful scaffolding.** Roles, steps, examples, and checks stay only when they encode a real requirement or correct a measured gap.
 - **Asks less, but asks well.** A compact question appears only when missing information materially changes the outcome or risk.
 
 ## Modes
@@ -149,7 +150,7 @@ python3 scripts/validate.py
 | --- | --- |
 | Package validator | Manifest, assets, metadata, JSON, SVG, PNG dimensions, public paths, and required files. |
 | Trigger routing | Representative requests that should and should not select the skill. |
-| Behavior evals | Silent execution, prompt-only mode, ASR invariants, destructive ambiguity, source-authority injection, and confirmation preservation. |
+| Behavior evals | Silent execution, prompt-only mode, ASR invariants, destructive ambiguity, source authority, progressive references, legacy-scaffolding removal, and proportionate validation. |
 
 The eval files specify observable expectations; they are not claims that model wording is deterministic.
 
@@ -173,4 +174,4 @@ This is an instructions-only package: no MCP server, API key, telemetry, or back
 
 ---
 
-Created by [Ilia](https://github.com/ilya-yarets) · [MIT License](LICENSE) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Privacy](PRIVACY.md) · [Terms](TERMS.md) · [Support](SUPPORT.md)
+Created by [Ilia](https://github.com/ilya-yarets) · [Changelog](CHANGELOG.md) · [MIT License](LICENSE) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md) · [Privacy](PRIVACY.md) · [Terms](TERMS.md) · [Support](SUPPORT.md)

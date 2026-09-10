@@ -20,6 +20,7 @@ EVALS_PATH = ROOT / "evals" / "evals.json"
 TRIGGERS_PATH = ROOT / "evals" / "trigger-queries.json"
 README_PATH = ROOT / "README.md"
 README_RU_PATH = ROOT / "README.ru.md"
+CHANGELOG_PATH = ROOT / "CHANGELOG.md"
 ICON_SVG_PATH = SKILL_ROOT / "assets" / "icon.svg"
 ICON_PNG_PATH = SKILL_ROOT / "assets" / "icon.png"
 HERO_SVG_PATH = ROOT / "assets" / "brand" / "hero.svg"
@@ -39,6 +40,12 @@ SECURITY_EVAL_IDS = {
     "retrieved-content-is-data",
     "user-designated-document-stays-bounded",
     "silent-mode-keeps-external-confirmation",
+}
+CONTEXT_ENGINEERING_EVAL_IDS = {
+    "legacy-scaffolding-debloat",
+    "examples-preserve-real-contract",
+    "progressive-reference-use",
+    "proportionate-validation-no-ritual",
 }
 SEMVER = re.compile(r"^(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)(?:[-+][0-9A-Za-z.-]+)?$")
 CYRILLIC = re.compile(r"[\u0400-\u04FF]")
@@ -152,6 +159,8 @@ def validate_readmes() -> None:
     require('src="assets/brand/hero.svg"' in english, "README.md must display the brand hero")
     require("README.ru.md" in english, "README.md must link to the Russian version")
     require("README.md" in russian, "README.ru.md must link to the English version")
+    require("CHANGELOG.md" in english, "README.md must link to the changelog")
+    require("CHANGELOG.md" in russian, "README.ru.md must link to the changelog")
     require(CYRILLIC.search(english) is None, "README.md must remain English-only")
     compatibility_markers = (
         "https://learn.chatgpt.com/docs/build-skills",
@@ -173,6 +182,14 @@ def validate_readmes() -> None:
             require((ROOT / target).exists(), f"{path.name} links to missing {target}")
 
 
+def validate_changelog() -> None:
+    require(CHANGELOG_PATH.is_file(), "missing CHANGELOG.md")
+    manifest = load_json(MANIFEST_PATH)
+    version = manifest.get("version")
+    changelog = CHANGELOG_PATH.read_text(encoding="utf-8")
+    require(f"## [{version}]" in changelog, "CHANGELOG.md must describe the package version")
+
+
 def validate_evals() -> None:
     payload = load_json(EVALS_PATH)
     require(isinstance(payload, dict) and payload.get("skill_name") == "prompt-architect", "eval skill_name is invalid")
@@ -189,6 +206,7 @@ def validate_evals() -> None:
         ids.append(case["id"])
     require(len(ids) == len(set(ids)), "eval ids must be unique")
     require(SECURITY_EVAL_IDS.issubset(ids), "required security behavior evals are missing")
+    require(CONTEXT_ENGINEERING_EVAL_IDS.issubset(ids), "required context-engineering evals are missing")
     prompts = [case["prompt"] for case in evals]
     require(any(prompt.startswith("$prompt-architect") for prompt in prompts), "Codex invocation eval is missing")
     require(any(prompt.startswith("/prompt-architect") for prompt in prompts), "slash invocation eval is missing")
@@ -240,6 +258,7 @@ def main() -> None:
     validate_skill()
     validate_brand_assets()
     validate_readmes()
+    validate_changelog()
     validate_evals()
     validate_community_files()
     validate_public_content()

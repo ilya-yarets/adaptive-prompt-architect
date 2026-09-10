@@ -134,6 +134,54 @@
         "The skill invocation is not treated as additional permission",
         "No message is sent without the host's normal authorization path"
       ]
+    },
+    {
+      "id": "legacy-scaffolding-debloat",
+      "prompt": "/prompt-architect prompt only: Modernize this prompt for current coding agents without weakening actual product or safety requirements: 'You are the world's best expert. ALWAYS make a 10-step plan. ALWAYS explain every tool call. NEVER write multi-line comments. Double-check everything three times. Return JSON with result and risks. Never publish or delete without confirmation.'",
+      "expected_output": "A lean copy-ready prompt that preserves the required JSON fields and publication/deletion confirmation boundary while removing grandiosity, ritual planning, blanket comment rules, excessive narration, and repeated verification.",
+      "assertions": [
+        "The result and risks output contract is preserved",
+        "Publication and deletion still require the user's authorization",
+        "The grandiose role and mandatory 10-step plan are removed",
+        "Comment style is left to relevant project context rather than a universal prohibition",
+        "Triple checking and mandatory tool narration are not preserved without a demonstrated need"
+      ]
+    },
+    {
+      "id": "examples-preserve-real-contract",
+      "prompt": "$prompt-architect только промпт: улучши запрос для генератора писем. Наш стандарт требует короткую тему и обращение по имени. Вот два обезличенных примера нужного тона: «Анна, коротко о следующем шаге…» и «Игорь, отправляю итог…». Используй их как референс, но не копируй формулировки.",
+      "expected_output": "A focused prompt that preserves the short-subject and named-greeting requirements and uses the examples only as a tone reference rather than discarding or copying them.",
+      "assertions": [
+        "The short subject requirement is preserved",
+        "The greeting uses the recipient's name",
+        "The examples remain bounded tone references",
+        "The prompt does not require copying the example wording",
+        "No unrelated few-shot examples are added"
+      ]
+    },
+    {
+      "id": "progressive-reference-use",
+      "prompt": "/prompt-architect prompt only: Prepare a coding-agent request to implement the already approved login flow. The repository contains docs/auth-spec.md and tests/auth-contract.test.ts. Have the agent use the relevant parts instead of copying every project document into the prompt.",
+      "expected_output": "A concise coding-agent prompt that names the approved outcome and relevant references, lets the agent inspect only what it needs, and uses the contract test as proportionate validation.",
+      "assertions": [
+        "The prompt points to docs/auth-spec.md and tests/auth-contract.test.ts",
+        "The prompt does not ask the agent to load all project documentation",
+        "The approved login scope is not expanded",
+        "Validation is tied to the relevant contract test",
+        "The implementation path is not over-prescribed"
+      ]
+    },
+    {
+      "id": "proportionate-validation-no-ritual",
+      "prompt": "$prompt-architect только промпт: попроси coding-агента изменить один текст кнопки в существующем интерфейсе и проверить результат",
+      "expected_output": "A compact prompt that asks the agent to locate the existing UI convention, change the button text, and run or perform one relevant focused check without adding a large plan, broad test suite, subagents, or repeated self-review.",
+      "assertions": [
+        "The requested button-text change remains the full scope",
+        "The prompt uses existing interface conventions when relevant",
+        "Validation is focused and proportionate",
+        "No mandatory planning document or chain of thought is requested",
+        "No verifier subagent or repeated double-checking is added"
+      ]
     }
   ]
 }

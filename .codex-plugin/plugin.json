@@ -1,7 +1,7 @@
 {
   "name": "adaptive-prompt-architect",
-  "version": "0.1.2",
-  "description": "Turns rough requests, voice transcripts, and streams of thought into focused prompts or finished work without prompt bloat or scope creep.",
+  "version": "0.2.0",
+  "description": "Turns noisy requests into focused prompts or finished work by reconstructing intent, using context selectively, and preserving scope.",
   "author": {
     "name": "Ilia",
     "url": "https://github.com/ilya-yarets"
@@ -27,8 +27,8 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Adaptive Prompt Architect",
-    "shortDescription": "Refines rough requests and completes them",
-    "longDescription": "Turns typo-filled notes, voice transcripts, and streams of thought into focused prompts or finished work. It adds only useful structure, preserves intent, and avoids prompt bloat.",
+    "shortDescription": "Turns rough intent into focused prompts or finished work",
+    "longDescription": "Reconstructs intent from voice transcripts, fragments, and typos; starts from the outcome; uses project context progressively; and either returns a copy-ready prompt or completes the task without prompt bloat or invented authority.",
     "developerName": "Ilia",
     "category": "Productivity",
     "capabilities": [
@@ -38,7 +38,7 @@
     "privacyPolicyURL": "https://github.com/ilya-yarets/adaptive-prompt-architect/blob/main/PRIVACY.md",
     "termsOfServiceURL": "https://github.com/ilya-yarets/adaptive-prompt-architect/blob/main/TERMS.md",
     "defaultPrompt": [
-      "Silently refine my rough request using relevant context, then complete the task.",
+      "Turn my rough request into focused work without expanding its scope.",
       "Turn my latest message into a copy-ready prompt only.",
       "Deeply refine my latest request, then complete it without expanding its scope."
     ],
